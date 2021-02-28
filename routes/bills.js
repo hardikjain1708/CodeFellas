@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
+const { customerSchema } = require('../schemas.js');
 const { billSchema } = require('../schemas.js');
 const { isLoggedIn } = require('../middleware');
 
 const ExpressError = require('../utils/ExpressError');
+const Customer = require('../models/customer');
+const BillItems = require('../models/bill');
+const Warehouse = require('../models/campground');
 const Bill = require('../models/bill');
 
 const validateBill = (req, res, next) => {
@@ -17,36 +21,26 @@ const validateBill = (req, res, next) => {
     }
 }
 
-// router.get('/', catchAsync(async (req, res) => {
-//     const bills = await Bill.find({});
-//     res.render('bills/index', { bills })
-// }));
+router.get('/', catchAsync(async (req, res) => {
+    const bills = await Bill.find({});
+    res.render('bills/index', { bills })
+}));
 
-// router.get('/new', isLoggedIn, (req, res) => {
-//     res.render('bills/new');
-// })
 
-// router.post('/', isLoggedIn, validateBill, catchAsync(async (req, res, next) => {
-//     const bill = new Bill(req.body.bill);
-//     await bill.save();
-//     req.flash('success', 'Successfully made a new bill!');
-//     res.redirect(`/bills/${bill._id}`)
-// }))
+router.get('/:id', catchAsync(async (req, res,) => {
+    const bill = await Bill.findById(req.params.id).populate('billproducts');
+    if (!bill) {
+        req.flash('error', 'Cannot find that bill!');
+        return res.redirect('bills');
+    }
+    res.render('bills/show', { bill });
+}));
 
-// router.get('/:id', catchAsync(async (req, res,) => {
-//     const bill = await Bill.findById(req.params.id).populate('billproducts');
-//     if (!bill) {
-//         req.flash('error', 'Cannot find that bill!');
-//         return res.redirect('bills');
-//     }
-//     res.render('bills/show', { bill });
-// }));
-
-// router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
-//     const { id } = req.params;
-//     await Bill.findByIdAndDelete(id);
-//     req.flash('success', 'Successfully deleted product')
-//     res.redirect('/bills');
-// }));
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await Bill.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted product')
+    res.redirect('/bills');
+}));
 
 module.exports = router;

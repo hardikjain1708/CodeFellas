@@ -4,11 +4,27 @@
     <div class="col-6 offset-3">
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title"><%= bill.customerName%></h5>
-                <p class="card-text"><%= bill.customerPhoneNum%></p>
+                <h5 class="card-title">Order Id: <%= bill._id%></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Rs.<%= bill.totalPrice%></li>
+                <table style="border:1px solid black; text-align: center;">
+                    <tr>
+                        <th style="border:1px solid black; text-align: center;">Product Name</th>
+                        <th style="border:1px solid black; text-align: center;">Product Price</th>
+                        <th style="border:1px solid black; text-align: center;">Quantity</th>
+                        <th style="border:1px solid black; text-align: center;">Total Price</th>
+                    </tr>
+                    <h5>All Products</h5>
+                    <% for(let i of bill.orders ) { %>
+                        <tr style="border:solid 1px black;">
+                            <td style="border:1px solid black; text-align: center;"><%= i.productName %></td>
+                            <td style="border:1px solid black; text-align: center;"><%= i.productPrice %></td>
+                            <td style="border:1px solid black; text-align: center;"><%= i.quantity %></td>
+                            <td style="border:1px solid black; text-align: center;"><%= i.totalProductPrice %></td>
+                        </tr>
+                    <% } %>
+                </table>
+                <li class="list-group-item">Total: Rs.<%= bill.totalPrice%></li>
             </ul>
             <div class="card-body">
                 <form class="d-inline" action="/bills/<%=bill._id%>?_method=DELETE" method="POST">

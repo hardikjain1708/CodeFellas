@@ -1,20 +1,31 @@
 <% layout('layouts/boilerplate')%>
-    <h4><%= customer.customerName %></h4>
-    <h4><%= customer.customerPhoneNum %></h4>
-    <a href="/customers/addItem">Lol</a>
+    <h4>Customer Name: <%= customer.customerName %></h4>
+    <h4>Phone Number: <%= customer.customerPhoneNum %></h4>
+    <a class="btn btn-primary" href="/customers/addItem">Add Item</a>
     <% if(billItems!=null) { %>
+        <table style="border:solid 1px black ">
+            <tr>
+                <th style="border:1px solid black; text-align: center;">Product Name</th>
+                <th style="border:1px solid black; text-align: center;">Product Price</th>
+                <th style="border:1px solid black; text-align: center;">Quantity</th>
+                <th style="border:1px solid black; text-align: center;">Total Price</th>
+            </tr>
+            <% for(let i of billItems.orders ) { %>
+                <tr>
+                    <td style="border:1px solid black; text-align: center;"><%= i.productName %></td>
+                    <td style="border:1px solid black; text-align: center;"><%= i.productPrice %></td>
+                    <td style="border:1px solid black; text-align: center;"><%= i.quantity %></td>
+                    <td style="border:1px solid black; text-align: center;"><%= i.totalProductPrice %></td>
+                </tr>
+            <% } %>
+        </table>
         <p>Grand total = <%= billItems.totalPrice %> </p>
-        <% for(let i of billItems.orders ) { %>
-            <div>
-                <p><%= i.productName %></p>
-                <p><%= i.productPrice %></p>
-                <p><%= i.quantity %></p>
-                <p><%= i.totalProductPrice %></p>
-            </div>
-        <% } %>
     <% } else { %>
         <p>No data items</p>
     <% } %>
+
+    <a class="btn btn-success" href="/bills">Finish Bill</a>
+
 
 
             

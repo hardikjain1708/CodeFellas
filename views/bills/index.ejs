@@ -2,18 +2,17 @@
 
 <h1>All Bills</h1>
 <div>
-    <a href="/bills/new">Add Bill</a>
+    <a class="btn btn-success" href="/customers/addCustomer">Add Bill</a>
 </div>
 <% for (let bill of bills){%>
 <div class="card" mb-3>
     <div class="row">
         <div class="col-md-4">
-            <h5 class="card-title"><%= bill.customerName %> </h5>
+            <h5 class="card-title" style="margin-left: 30px;">Order Id: <%= bill._id%></h5>
         </div>
         <div class="col-md-8 d-flex justify-content-center align-items-center">
             <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                <h5 class="card-title"><%= bill.customerPhoneNum %> </h5>
-                <h5 class="card-title"><%= bill.totalPrice %> </h5>
+                <h5 class="card-title">Rs.<%= bill.totalPrice %> </h5>
                 <a class="btn btn-primary" href="/bills/<%=bill._id%>">View <%=bill.title%></a>
             </div>
         </div>

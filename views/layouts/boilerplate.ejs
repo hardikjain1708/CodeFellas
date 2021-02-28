@@ -11,9 +11,10 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body style="background: rgb(197,247,255);";
+background: radial-gradient(circle, rgba(197,247,255,1) 63%, rgba(116,231,254,1) 94%);" d-flex flex-column vh-100">
     <%- include('../partials/navbar')%>
-    <main class="container mt-5">
+    <main class="container mt-5" style="min-height: 70vh;">
         <%- include('../partials/flash')%>
         <%- body %>
     </main>
