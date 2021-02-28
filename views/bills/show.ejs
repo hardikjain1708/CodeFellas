@@ -1,0 +1,21 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><%= bill.customerName%></h5>
+                <p class="card-text"><%= bill.customerPhoneNum%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Rs.<%= bill.totalPrice%></li>
+            </ul>
+            <div class="card-body">
+                <form class="d-inline" action="/bills/<%=bill._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

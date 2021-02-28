@@ -1,0 +1,20 @@
+<% layout('layouts/boilerplate')%>
+    <h4><%= customer.customerName %></h4>
+    <h4><%= customer.customerPhoneNum %></h4>
+    <a href="/customers/addItem">Lol</a>
+    <% if(billItems!=null) { %>
+        <p>Grand total = <%= billItems.totalPrice %> </p>
+        <% for(let i of billItems.orders ) { %>
+            <div>
+                <p><%= i.productName %></p>
+                <p><%= i.productPrice %></p>
+                <p><%= i.quantity %></p>
+                <p><%= i.totalProductPrice %></p>
+            </div>
+        <% } %>
+    <% } else { %>
+        <p>No data items</p>
+    <% } %>
+
+
+            
