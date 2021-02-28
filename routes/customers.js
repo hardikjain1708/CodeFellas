@@ -22,7 +22,7 @@ const validateCustomer = (req, res, next) => {
     }
 }
 
-router.get("/addCustomer", catchAsync(async (req, res, next) => {
+router.get("/addCustomer", isLoggedIn, catchAsync(async (req, res, next) => {
     res.render("customers/addCustomer");
 }))
 
